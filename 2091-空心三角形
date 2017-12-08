@@ -1,0 +1,50 @@
+/*
+ * main.c
+ *
+ *  Created on: Dec 5, 2017
+ *      Author: gary9
+ */
+#include<stdio.h>
+int main(void){
+    char a=' ';
+    int b,i,j;
+    int cnt=0;
+    while(1){
+        if(~scanf("%c",&a) &&  a=='@'){
+            break;
+        }
+        else if(a!='\n'){
+            scanf("%d",&b);
+            if(cnt!=0){
+                printf("\n");
+            }
+            //printf("%c %d\n",a,b);
+            //&#191;&#170;&#202;&#188;&#187;&#173;&#205;&#188;
+            for(i=0;i<b;i++){
+                for(j=0;j<b-i-1;j++){
+                    printf(" ");
+                }
+                printf("%c",a);
+                if(i==0){
+                    ;
+                }
+                else if(i==b-1){
+                    for(j=0;j<2*i;j++){
+                        printf("%c",a);
+
+                    }
+                }
+                else{
+                    for(j=1;j<=2*i-1;j++){
+                        printf(" ");
+
+                    }
+                    printf("%c",a);
+                }
+                printf("\n");
+            }
+            cnt++;
+        }
+    }
+    return 0;
+}
