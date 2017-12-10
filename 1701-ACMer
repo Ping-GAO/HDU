@@ -1,0 +1,28 @@
+/*
+ * main.c
+ *
+ *  Created on: Dec 10, 2017
+ *      Author: gary9
+ */
+#include <stdio.h>
+int main(){
+	int cnt;
+	int i;
+	double P,Q;
+	scanf("%d",&cnt);
+	while(cnt!=0){
+		i=0;
+		scanf("%lf%lf",&P,&Q);
+		while(1){
+			if((int)(Q*i/100)-(int)(P*i/100)>=1){
+				printf("%d\n",i);
+				break;
+			}
+			i++;
+		}
+		cnt--;
+	}
+
+
+	return 0;
+}
