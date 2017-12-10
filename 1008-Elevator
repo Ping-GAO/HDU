@@ -1,0 +1,37 @@
+/*
+ * main.c
+ *
+ *  Created on: Dec 10, 2017
+ *      Author: gary9
+ */
+
+#include <stdio.h>
+#include <stdlib.h>
+int main(){
+	int cnt,i;
+	int sum;
+	int pre_state;
+	while(~scanf("%d",&cnt)&&cnt){
+		int *array = (int *)malloc(sizeof(int)*cnt);
+		sum = 0;
+		pre_state = 0;
+		// at the begining it at ground floor
+		for(i=0;i<cnt;i++){
+			scanf("%d",&array[i]);
+			//printf("%d--",array[i]);
+		}
+		for(i=0;i<cnt;i++){
+			if(array[i]>pre_state){
+				sum += (array[i]-pre_state)*6+5;
+			}
+			else{
+				sum += (pre_state-array[i])*4+5;
+			}
+			pre_state = array[i];
+
+		}
+		printf("%d\n",sum);
+		free(array);
+	}
+	return 0;
+}
