@@ -1,0 +1,32 @@
+/*
+ * main.c
+ *
+ *  Created on: Dec 10, 2017
+ *      Author: gary9
+ */
+
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+int main(){
+	int cnt,i,j;
+	char s[50];
+	scanf("%d",&cnt);
+	for(i=0;i<cnt;i++){
+		scanf("%s",s);
+		for(j=0;j<strlen(s);j++){
+			char temp = tolower(s[j]);
+			if(temp=='a'||temp=='e'||temp=='i'||temp=='o'||temp=='u'){
+				s[j] = toupper(s[j]);
+			}
+			else{
+				s[j] = tolower(s[j]);
+			}
+		}
+		printf("%s\n",s);
+
+	}
+
+
+	return 0;
+}
