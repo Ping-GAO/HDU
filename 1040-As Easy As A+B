@@ -1,0 +1,54 @@
+/*
+ * main.c
+ *
+ *  Created on: Dec 11, 2017
+ *      Author: gary9
+ */
+#include <stdio.h>
+#include <stdlib.h>
+void bubblesort(int *, int);
+int main(){
+	int cnt,num;
+	scanf("%d",&cnt);
+	int i,j;
+	while(cnt!=0){
+		scanf("%d",&num);
+		int *array = (int *)malloc(sizeof(int)*num);
+		for(j=0;j<num;j++){
+			scanf("%d",&array[j]);
+		}
+		bubblesort(array,num);
+		for(i=0;i<num;i++){
+			if(i!=num-1){
+				printf("%d ",array[i]);
+			}
+			else{
+				printf("%d",array[i]);
+			}
+		}
+		printf("\n");
+		free(array);
+		cnt--;
+	}
+	return 0;
+}
+
+void bubblesort(int *array,int len){
+	int i,j;
+	int swap;
+	int temp;
+	for(i=0;i<len;i++){
+		swap = 0;
+		for(j=0;j<len-i-1;j++){
+			if(array[j]>array[j+1]){
+				temp = array[j];
+				array[j] = array[j+1];
+				array[j+1] = temp;
+				swap = 1;
+			}
+		}
+		if(swap==0){
+			break;
+		}
+	}
+}
