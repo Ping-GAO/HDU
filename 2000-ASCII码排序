@@ -1,0 +1,27 @@
+#include <stdio.h>
+void b_sort(char *array);
+int main(){
+	char array[3];
+	while(~scanf("%s",array)){
+		b_sort(array);
+		printf("%c ",array[0]);
+		printf("%c ",array[1]);
+		printf("%c\n",array[2]);
+	}
+	return 0;
+}
+
+void b_sort(char *array){
+	int i,j;
+	for(i=0;i<2;i++){
+		for(j=0;j<2;j++){
+			if(array[j+1]<array[j]){
+			
+				char temp = array[j];
+				array[j] = array[j+1];
+				array[j+1] = temp;
+			}
+		}
+	
+	}
+}
