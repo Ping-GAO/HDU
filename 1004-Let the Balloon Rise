@@ -1,0 +1,42 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#define MAX 10
+int main() {
+	int num;
+	while (~scanf("%d",&num)&&num) {
+		// printf("%d\n",num);
+		int i,j;
+		int max = -1;
+		char **array = (char **)malloc(num*sizeof(char *));
+		for (i = 0; i < num;i++) {
+			array[i] = (char *)malloc(MAX*sizeof(char));
+			scanf("%s",array[i]);
+		}
+		for (i = 0; i < num; i++) {
+			int cnt = 0;
+			for (j = 0; j < num;j++) {
+				if (strcmp(array[i],array[j])==0) {
+					cnt++;
+				}
+			}
+			if (cnt>max) {
+				max = cnt;
+			}
+		}
+		for (i = 0; i < num; i++) {
+			int cnt = 0;
+			for (j = 0; j < num; j++) {
+				if (strcmp(array[i], array[j]) == 0) {
+					cnt++;
+				}
+			}
+			if (cnt==max) {
+				printf("%s\n",array[i]);
+				break;
+			}
+		}
+	}
+
+	return 0;
+}
