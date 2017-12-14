@@ -1,0 +1,31 @@
+#include <stdio.h>
+int main(){
+	int m,n;
+	int i;
+	while(~scanf("%d%d",&m,&n)){
+		int flag = 0;
+		int cnt = 0;
+		for(i=m;i<=n;i++){
+			int a = i%10; 
+			int b = (i/10)%10;
+			int c =	i/100;
+			if(a*a*a+b*b*b+c*c*c==i){
+				if(cnt==0){
+					printf("%d",i);	
+				}
+				else{
+					printf(" %d",i);
+				}
+				cnt++;
+				flag = 1;
+			}
+		}
+		if(!flag){
+			printf("no\n");
+		}
+		else{
+			printf("\n");
+		}
+	}
+	return 0;
+}
