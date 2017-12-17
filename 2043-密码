@@ -1,0 +1,52 @@
+#include <iostream>
+#include <cctype>
+#include <set> 
+#include <string>
+using namespace std;
+int main() {
+	int cases;
+	cin >> cases;
+	for (int i = 0; i<cases; i++) {
+		set<string> s;
+		string s2;
+		cin >> s2;
+		//cout<<s2<<endl;
+		//cout<<"size"<<s2.length()<<endl;
+		if (s2.size()<8 || s2.length()>16) {
+			cout << "NO" << endl;
+			continue;
+		}
+		for (auto c : s2) {
+			if (isdigit(c)) {
+				// cout << "yes" << endl;
+				s.insert("digit");
+			}
+			else if (isupper(c)) {
+				s.insert("upper");
+			}
+			else if (islower(c)) {
+				s.insert("lower");
+			}
+			else if (c=='~' || c == '!' || c == '@' || c == '#' || c == '$' || c == '%' || c == '^') {
+				s.insert("sign");
+			}
+			else {
+				//cout << c << endl;
+				cout << "NO" << endl;
+				continue;
+			}
+		}
+		// cout <<"set size"<< s.size()<<endl;
+		if (s.size()<3) {
+			cout << "NO" << endl;
+			continue;
+		}
+		cout << "YES" << endl;
+	}
+
+
+
+
+
+	return 0;
+}
