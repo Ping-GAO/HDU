@@ -1,0 +1,53 @@
+#include <stdio.h>
+char matrix[20][20];
+int cnt;
+void DFS(int start_i,int start_j,int i,int j);
+int main(){
+    int width,height;
+    while(~scanf("%d%d",&width,&height)&&(width||height)){
+        int i,j;
+        char temp;
+        int start_i,start_j;
+        for(i=0;i<height;i++){
+            for(j=0;j<width;j++){
+                scanf("%c",&temp);
+                if(temp=='\n'){
+                    //printf("j is %d\n",j);
+                    j--;
+                }
+                else{
+                    matrix[i][j]=temp;
+                }
+                if(temp=='@'){
+                    start_i= i;
+                    start_j=j;
+                }    
+            }
+        }
+        cnt=0;
+        //printf("start_i is %d start_j is %d\n",start_i,start_j);
+        DFS(start_i,start_j,i,j);
+        printf("%d\n",cnt);
+        
+
+    }
+
+
+}
+
+
+void DFS(int start_i,int start_j,int i,int j){
+    
+    if(start_i<0||start_j<0||start_i>i-1||start_j>j-1){
+        return;
+    }
+    if(    matrix[start_i][start_j]=='#'){
+        return;
+    }
+    cnt++;
+    matrix[start_i][start_j]='#';
+    DFS(start_i+1,start_j,i,j);
+    DFS(start_i-1,start_j,i,j);
+    DFS(start_i,start_j+1,i,j);    
+    DFS(start_i,start_j-1,i,j);
+}
