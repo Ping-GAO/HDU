@@ -1,0 +1,31 @@
+#include <stdio.h>
+#include <string.h>
+int find_num(int N,int M);
+int dp[50][50];
+int main(){
+    int N,M;
+    while(~scanf("%d %d",&N,&M)&&(M||N)){
+        memset(dp,-1,sizeof(dp));
+        printf("%d\n",find_num(N,M));
+    }
+    return 0;
+}
+
+// 4 2
+int find_num(int N,int M){
+    if(N==1){
+        return 1;
+    }
+    if(dp[N][M]!=-1){
+        return dp[N][M];
+    }
+    int i;
+    int sum =0;
+    for(i=1;i<=M;i++){
+        if((N-i) >= 1){
+            sum += find_num(N-i,M);
+        }
+    }
+    dp[N][M] = sum;
+    return sum;
+}
