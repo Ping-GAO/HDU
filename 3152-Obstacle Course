@@ -1,0 +1,72 @@
+#include <iostream>
+#include <queue>
+#include <time.h>
+
+struct node {
+    int i;
+    int j;
+    int cost;
+    int distance;
+};
+
+bool operator <(const node& a, const node& b) {
+    return a.distance > b.distance;
+};
+
+node matrix[130][130];
+using namespace std;
+int main() {
+    
+    int num;
+    int cnt = 1;
+    while (cin >> num&&num) {
+        int i, j;
+        for (i = 0; i<num; i++) {
+            for (j = 0; j<num; j++) {
+                cin >> matrix[i][j].cost;
+                matrix[i][j].i = i;
+                matrix[i][j].j = j;
+                matrix[i][j].distance = 999;
+            }
+        }
+        
+        priority_queue <node> myQ;
+        matrix[0][0].distance = matrix[0][0].cost;
+        myQ.push(matrix[0][0]);
+        while (!myQ.empty()) {
+            node temp = myQ.top();
+            myQ.pop();
+            int a = temp.i;
+            int b = temp.j;
+            if (temp.i < (num - 1)) {
+                if (matrix[a + 1][b].distance > matrix[a][b].distance + matrix[a + 1][b].cost) {
+                    matrix[a + 1][b].distance = matrix[a][b].distance + matrix[a + 1][b].cost;
+                    myQ.push(matrix[a + 1][b]);
+                }
+            }
+            if (temp.i >= 1) {
+                if (matrix[a - 1][b].distance > matrix[a][b].distance + matrix[a - 1][b].cost) {
+                    matrix[a - 1][b].distance = matrix[a][b].distance + matrix[a - 1][b].cost;
+                    myQ.push(matrix[a - 1][b]);
+                }
+
+            }
+            if (temp.j < num - 1) {
+                if (matrix[a][b + 1].distance > matrix[a][b].distance + matrix[a][b + 1].cost) {
+                    matrix[a][b + 1].distance = matrix[a][b].distance + matrix[a][b + 1].cost;
+                    myQ.push(matrix[a][b + 1]);
+                }
+            }
+            // turn left
+            if (temp.j >= 1) {
+                if (matrix[a][b - 1].distance > matrix[a][b].distance + matrix[a][b - 1].cost) {
+                    matrix[a][b - 1].distance = matrix[a][b].distance + matrix[a][b - 1].cost;
+                    myQ.push(matrix[a][b - 1]);
+                }
+            }
+        }
+        cout << "Problem " << cnt << ": " << matrix[num - 1][num - 1].distance << endl;
+        cnt++;
+    }
+    return 0;
+}
