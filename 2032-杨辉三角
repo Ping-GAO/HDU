@@ -1,0 +1,49 @@
+#include <stdio.h>
+#include <string.h>
+int matrix[30][30];
+int main(){
+    int num;
+
+    memset(matrix,0,sizeof(matrix));
+    matrix[0][0]=1;
+    matrix[1][0]=1;
+    matrix[1][1]=1;
+    int i,j;
+    for(i = 2;i < 30;i++){
+        for(j = 0;j < 30;j++){
+            if(j==0||j==i){
+                matrix[i][j]=1;
+            }
+            else{
+                matrix[i][j] = matrix[i-1][j-1]+matrix[i-1][j];
+            }
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    while(~scanf("%d",&num)){
+        int a,b;
+        for(a = 0;a < num;a++){
+            for(b = 0;b <=a;b++){
+                if(b==0){
+                    printf("%d",matrix[a][b]);
+                }
+                else{
+                    printf(" %d",matrix[a][b]);
+                }
+            }
+            printf("\n");
+        }
+        printf("\n");
+        
+        
+    }
+
+    return 0;
+}
