@@ -1,0 +1,44 @@
+#include <iostream>
+using namespace std;
+int array[100];
+int main(){
+	int n,m;
+	int i;
+	for(i=0;i<100;i++){
+		array[i] = (i + 1) * 2;
+	}
+	
+	int pos;
+	int num_left;
+	while(cin>>n>>m){
+		num_left = n;
+		pos = 0;
+		while(pos != n){
+			int sum = 0;
+			if(num_left>=m){
+				for(int i=0;i<m;i++,pos++){
+					sum += array[pos]; 
+				}
+				num_left -= m;
+			
+				if(num_left==0){
+					cout<<sum/m<<endl;
+				}
+				else{
+					cout<<sum/m<<" ";
+				}
+				
+			}
+			else{
+				int sum2 = 0;
+				int i;
+				for(i=0;i<num_left;i++,pos++){
+					sum2 += array[pos];
+				}
+				cout<<sum2/i<<endl;	
+			}
+		} 
+	}
+
+	return 0;
+}
