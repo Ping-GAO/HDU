@@ -1,0 +1,45 @@
+#include <stdio.h>
+typedef struct matrix{
+    int m[2][2];
+}Matrix;
+Matrix mupltiply(Matrix a, Matrix b);
+int main(){
+    int A,B,n;
+    while(~scanf("%d%d%d",&A,&B,&n)){
+        if(A==0&&B==0&&n==0) break;
+        if(n==1||n==2) printf("1\n");
+        else {
+            Matrix temp = {1, 0, 1, 0};
+            Matrix index = {A % 7, B % 7, 1, 0};
+            n = n - 2;
+            // if don't include base case n go negative
+            while (n != 0) {
+                if (n & 1) {
+
+                    // temp = temp*index;
+                    temp = mupltiply(temp, index);
+                }
+                // index *= index;
+                index = mupltiply(index, index);
+                n >>= 1;
+
+            }
+            printf("%d\n", (temp.m[0][0] + temp.m[0][1]) % 7);
+        }
+    }
+
+
+    return 0;
+}
+
+
+Matrix mupltiply(Matrix a, Matrix b){
+    Matrix res= {0,0,0,0};;
+    int i,j;
+    for(i=0;i<2;i++){
+        for(j=0;j<2;j++){
+           res.m[i][j] = ((a.m[i][0]*b.m[0][j])%7 + (a.m[i][1]*b.m[1][j])%7)%7;
+        }
+    }
+    return res;
+}
