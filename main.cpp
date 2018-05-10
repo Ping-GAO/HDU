@@ -1,0 +1,61 @@
+#include <iostream>
+#include <algorithm>
+#include <String.h>
+using namespace std;
+int main(){
+    int len;
+    int arr[10005];
+    int dp[10005];
+    while(cin>>len && len!=0){
+        memset(arr,0,sizeof(arr));
+        memset(dp,0,sizeof(dp));
+        for(int i=0;i<len;i++){
+            cin>>arr[i];
+            // the sum of sequence only contain itself should be itself
+            dp[i] = arr[i];
+        }
+
+        for(int i=1;i<len;i++){
+            dp[i] = max(arr[i],arr[i]+dp[i-1]);
+        }
+        int max_v = -999;
+        for(int i=0;i<len;i++){
+            if(dp[i]>max_v){
+                max_v = dp[i];
+            }
+        }
+
+
+        if(max_v > 0){
+            cout<<max_v<<" ";
+
+        }
+        else{
+            cout<<0<<" ";
+        }
+        if(max_v < 0){
+            cout<<arr[0]<<" "<<arr[len-1]<<endl;
+        }
+        else{
+
+            for(int i=0;i<len;i++){
+                if(dp[i] == max_v){
+                    int j;
+                    j=i;
+                    while(j>=0){
+                        max_v -= arr[j];
+                        if(max_v ==0){
+                            break;
+                        }
+                        j--;
+                    }
+                    cout<<arr[j]<<" "<<arr[i]<<endl;
+                    break;
+                }
+            }
+        }
+
+    }
+
+    return 0;
+}
