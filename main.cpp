@@ -1,0 +1,123 @@
+#include <iostream>
+#include <cstring>
+
+using namespace std;
+void compare(int a,int b, int *B,int *C);
+struct query{
+    int num;
+    int B;
+    int C;
+};
+int check(const int * pArray1, const int * pArray2);
+void test_compare();
+query myQ[105];
+int main() {
+    int N;
+    //test_compare();
+    while(cin>>N && N){
+        int num,B,C;
+        for(int i=0;i<N;i++){
+            cin>>num>>B>>C;
+            myQ[i] = {num, B, C};
+        }
+        int cnt = 0;
+        int ans = 0;
+        for(int i=1;i<=9;i++){
+            for(int j=0;j<=9;j++){
+                for(int k=0;k<=9;k++){
+                    for(int c=0;c<=9;c++){
+                        /*
+                         * for each number generated test the query
+                         */
+                        bool flag = true;
+                        int temp = i*1000 + j*100 + k*10 + c;
+                        for(int d=0;d<N;d++){
+                            //cout<<"temp: "<<temp<<endl;
+                            int B_, C_;
+                            compare(temp,myQ[d].num,&B_,&C_);
+                            if(B_ == myQ[d].B && C_== myQ[d].C){
+                                ;
+                            }
+                            else{
+                                flag = false;
+                                break;
+                            }
+                        }
+                        if(flag){
+                            cnt++;
+                            ans = temp;
+                            //cout<<ans<<endl;
+                        }
+                    }
+                }
+            }
+        }
+
+        if(cnt!=1){
+            cout<<"Not sure"<<endl;
+        }
+        else{
+            cout<<ans<<endl;
+        }
+
+
+    }
+    return 0;
+}
+
+void compare(int a,int b, int *B,int *C){
+    int a1[4];
+    int b1[4];
+    int cnt= 3;
+    while(a){
+        a1[cnt] = a%10;
+        a /=10;
+        cnt--;
+    }
+    cnt = 3;
+    while(b){
+        b1[cnt] = b%10;
+        b /=10;
+        cnt--;
+    }
+    *B = 0;
+    *C = 0;
+    for(int i=0;i<=3;i++){
+        if(a1[i]==b1[i]){
+            (*C)++;
+        }
+    }
+    *B = check(a1,b1);
+
+
+}
+
+void test_compare(){
+    int a= 4815;
+    int b= 3585;
+    int B,C;
+    compare(a,b,&B,&C);
+    cout<<B<<"--"<<C<<endl;
+
+
+}
+int check(const int * pArray1, const int * pArray2){
+    int copy[4];
+    for(int i=0;i<=3;i++){
+        copy[i] = pArray2[i];
+    }
+    int sum = 0;
+    for(int i=0;i<=3;i++){
+        for(int j=0;j<=3;j++){
+            if(pArray1[i]==copy[j]){
+                copy[j] = -1;
+                sum++;
+                break;
+            }
+        }
+    }
+    return sum;
+
+
+
+}
