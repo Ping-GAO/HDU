@@ -1,0 +1,75 @@
+#include <iostream>
+#include <string>
+#include <map>
+#include <vector>
+#include <sstream>
+
+using namespace std;
+void initialize_Map();
+map <string,int> myM;
+vector<string> split(const string &s, char delim);
+int main() {
+    initialize_Map();
+    string temp;
+    while(getline(cin, temp)){
+        int a,b;
+        temp.pop_back();
+        //cout<<temp<<endl;
+        vector<string> myV;
+        vector<string> myV1;
+        vector<string> myV2;
+        myV = split(temp, '+');
+        //cout<<myV[0]<<"----"<<myV[1]<<endl;
+        if(myV[0]== "zero " && myV[1]== " zero "){
+            break;
+        }
+        string temp2 = myV[1];
+        myV1 = split(myV[0], ' ');
+
+        temp2.erase(0,1);
+        //cout<<"temp:"<<temp2<<endl;
+        myV2 = split(temp2, ' ');
+        if(myV1.size()==1){
+            a = myM[myV1[0]];
+        }
+        else{
+            a = myM[myV1[0]]*10 + myM[myV1[1]];
+        }
+        //cout<<"a: "<<a<<endl;
+        if(myV2.size()==1){
+            b = myM[myV2[0]];
+        }
+        else{
+            b = myM[myV2[0]]*10 + myM[myV2[1]];
+        }
+        //cout<<"b: "<<b<<endl;
+        cout<<a+b<<endl;
+    }
+
+    return 0;
+}
+
+void initialize_Map(){
+    myM["zero"] = 0;
+    myM["one"] = 1;
+    myM["two"] = 2;
+    myM["three"] = 3;
+    myM["four"] = 4;
+    myM["five"] = 5;
+    myM["six"] = 6;
+    myM["seven"] = 7;
+    myM["eight"] = 8;
+    myM["nine"] = 9;
+    myM["ten"] = 10;
+
+}
+
+vector<string> split(const string &s, char delim) {
+    stringstream ss(s);
+    string item;
+    vector<string> tokens;
+    while (getline(ss, item, delim)) {
+        tokens.push_back(item);
+    }
+    return tokens;
+}
