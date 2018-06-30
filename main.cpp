@@ -1,0 +1,39 @@
+#include <iostream>
+#include <string>
+#include <algorithm>
+using namespace std;
+struct DNA{
+    int diff;
+    string seq;
+};
+bool compare(DNA a, DNA b){
+    return a.diff < b.diff;
+}
+DNA arr[105];
+int main(){
+    int a,n;
+   cin>>a>>n;
+    for(int i=0;i<n;i++){
+        cin>>arr[i].seq;
+        arr[i].diff = 0;
+        //cout<<i<<endl;
+    }
+    for(int i=0;i<n;i++){
+        for(int j=0;j<a;j++){
+            for(int k=j+1;k<a;k++){
+                if(arr[i].seq.at(j) > arr[i].seq.at(k)){
+                    arr[i].diff++;
+                }
+            }
+        }
+    }
+    //cout<<"ok"<<endl;
+    sort(arr, arr+n,compare);
+    for(int i=0;i<n;i++){
+        cout<<arr[i].seq;
+        if(i!=n-1){
+            cout<<endl;
+        }
+    }
+    return 0;
+}
